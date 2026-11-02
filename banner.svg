@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="320" viewBox="0 0 1200 320" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1d2a5c"/>
+      <stop offset="1" stop-color="#2f5bd3"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="320" rx="18" fill="url(#bg)"/>
+  <circle cx="1080" cy="40" r="160" fill="#ffffff" opacity="0.05"/>
+  <circle cx="980" cy="300" r="110" fill="#ffffff" opacity="0.05"/>
+
+  <text x="64" y="118" fill="#ffffff" font-size="54" font-weight="800">APUSH SAQ Practice</text>
+  <text x="66" y="164" fill="#c9d5ff" font-size="24">A timed, distraction-free writing tool for Short Answer Questions</text>
+
+  <g font-size="18" font-weight="700">
+    <rect x="64" y="210" width="150" height="46" rx="23" fill="#ffffff" opacity="0.14"/>
+    <text x="139" y="240" fill="#ffffff" text-anchor="middle">Claim /1</text>
+    <rect x="228" y="210" width="170" height="46" rx="23" fill="#ffffff" opacity="0.14"/>
+    <text x="313" y="240" fill="#ffffff" text-anchor="middle">Evidence /3</text>
+    <rect x="412" y="210" width="170" height="46" rx="23" fill="#ffffff" opacity="0.14"/>
+    <text x="497" y="240" fill="#ffffff" text-anchor="middle">Analysis /3</text>
+    <rect x="596" y="210" width="130" height="46" rx="23" fill="#ffffff"/>
+    <text x="661" y="240" fill="#1d2a5c" text-anchor="middle">Total /7</text>
+  </g>
+
+  <g transform="translate(870 96)">
+    <rect width="250" height="128" rx="20" fill="#ffffff"/>
+    <text x="125" y="58" fill="#5d6677" font-size="18" font-weight="600" text-anchor="middle">TIME LEFT</text>
+    <text x="125" y="106" fill="#1d2330" font-size="52" font-weight="800" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace">4:00</text>
+  </g>
+</svg>

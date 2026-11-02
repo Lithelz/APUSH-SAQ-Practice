@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>APUSH SAQ Practice</title>
+<style>
+  :root {
+    --bg: #f6f7f9;
+    --panel: #ffffff;
+    --text: #1d2330;
+    --muted: #5d6677;
+    --border: #dde1e8;
+    --accent: #2f5bd3;
+    --accent-text: #ffffff;
+    --warn-bg: #fff4c2;
+    --warn-text: #7a5a00;
+    --danger-bg: #ffe0e0;
+    --danger-text: #a01818;
+    --ok: #1f7a3d;
+    --locked-bg: #eef0f4;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #14171d;
+      --panel: #1c2028;
+      --text: #e7eaf0;
+      --muted: #9aa3b4;
+      --border: #313744;
+      --accent: #6d8ff0;
+      --accent-text: #0e1220;
+      --warn-bg: #4a3d0c;
+      --warn-text: #ffe28a;
+      --danger-bg: #4d1717;
+      --danger-text: #ffb3b3;
+      --ok: #6fd08f;
+      --locked-bg: #232833;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #14171d;
+    --panel: #1c2028;
+    --text: #e7eaf0;
+    --muted: #9aa3b4;
+    --border: #313744;
+    --accent: #6d8ff0;
+    --accent-text: #0e1220;
+    --warn-bg: #4a3d0c;
+    --warn-text: #ffe28a;
+    --danger-bg: #4d1717;
+    --danger-text: #ffb3b3;
+    --ok: #6fd08f;
+    --locked-bg: #232833;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--panel);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  header h1 { font-size: 1.05rem; margin: 0; flex: 1 1 auto; }
+  #themeBtn { order: 3; }
+  @media (max-width: 760px) { #themeBtn { order: 0; } }
+
+  .timer-wrap { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  #timer {
+    font: 700 1.9rem/1 ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    padding: 6px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    min-width: 6.2ch;
+    text-align: center;
+    transition: background .2s, color .2s;
+  }
+  #timer.warn { background: var(--warn-bg); color: var(--warn-text); border-color: transparent; }
+  #timer.danger { background: var(--danger-bg); color: var(--danger-text); border-color: transparent; }
+
+  button {
+    font: inherit;
+    font-size: .95rem;
+    padding: 7px 14px;
+    border-radius: 7px;
+    border: 1px solid var(--border);
+    background: var(--panel);
+    color: var(--text);
+    cursor: pointer;
+  }
+  button:hover { border-color: var(--accent); }
+  button:focus-visible, input:focus-visible, textarea:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  button.primary { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
+  button:disabled { opacity: .5; cursor: default; }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px 16px 40px;
+  }
+  aside {
+    position: sticky;
+    top: 84px;
+    align-self: start;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+  }
+  aside h2 { font-size: 1rem; margin: 0 0 10px; }
+  .rubric-item { padding: 10px 0; border-top: 1px solid var(--border); }
+  .rubric-item:first-of-type { border-top: none; padding-top: 0; }
+  .rubric-item strong { display: flex; justify-content: space-between; }
+  .rubric-item p { margin: 4px 0 0; color: var(--muted); font-size: .9rem; }
+  .total {
+    display: flex; justify-content: space-between;
+    font-weight: 700;
+    border-top: 2px solid var(--text);
+    padding-top: 10px;
+    margin-top: 4px;
+  }
+
+  main {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px;
+    min-width: 0;
+  }
+  label { display: block; font-weight: 600; margin-bottom: 6px; }
+  input[type="text"], textarea {
+    width: 100%;
+    font: inherit;
+    color: var(--text);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+  }
+  textarea { min-height: 320px; resize: vertical; line-height: 1.6; }
+  textarea:disabled { background: var(--locked-bg); color: var(--muted); }
+  .field { margin-bottom: 16px; }
+
+  .row {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 10px; flex-wrap: wrap; margin-top: 10px;
+  }
+  #wordCount { color: var(--muted); font-size: .95rem; }
+
+  #timesUp {
+    display: none;
+    background: var(--danger-bg);
+    color: var(--danger-text);
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin-bottom: 12px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+    font-weight: 600;
+  }
+  #timesUp.show { display: flex; }
+
+  #copyStatus { color: var(--ok); font-weight: 600; font-size: .95rem; min-height: 1.5em; }
+
+  @media (max-width: 760px) {
+    .layout { grid-template-columns: 1fr; }
+    aside { position: static; order: 2; }
+    .timer-wrap { flex-basis: 100%; }
+    #timer { font-size: 1.5rem; padding: 6px 10px; }
+    .timer-wrap button { padding: 7px 10px; }
+    .timer-wrap { gap: 6px; }
+    textarea { min-height: 240px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>APUSH SAQ Practice</h1>
+  <button id="themeBtn" title="Toggle light/dark mode" aria-label="Toggle light/dark mode">Theme</button>
+  <div class="timer-wrap">
+    <div id="timer" aria-live="polite">4:00</div>
+    <button id="startBtn" class="primary">Start</button>
+    <button id="pauseBtn" disabled>Pause</button>
+    <button id="resetBtn">Reset</button>
+  </div>
+</header>
+
+<div class="layout">
+  <aside aria-label="Grading rubric">
+    <h2>Rubric</h2>
+    <div class="rubric-item">
+      <strong><span>Claim</span><span>/1</span></strong>
+      <p>Answers the prompt directly.</p>
+    </div>
+    <div class="rubric-item">
+      <strong><span>Evidence</span><span>/3</span></strong>
+      <p>Correctly cites a relevant, specific piece of evidence from the assigned reading.</p>
+    </div>
+    <div class="rubric-item">
+      <strong><span>Analysis</span><span>/3</span></strong>
+      <p>Explains the significance of the evidence to the prompt directly and in detail (“So what about the evidence?” / “This shows…”).</p>
+    </div>
+    <div class="total"><span>Total</span><span>/7</span></div>
+  </aside>
+
+  <main>
+    <div class="field">
+      <label for="prompt">SAQ prompt</label>
+      <input type="text" id="prompt" placeholder="e.g. Briefly explain ONE cause of the Market Revolution, 1800–1848." autocomplete="off">
+    </div>
+
+    <div id="timesUp" role="alert">
+      <span>Time's up!</span>
+      <button id="unlockBtn">Unlock to keep writing</button>
+    </div>
+
+    <div class="field">
+      <label for="response">Your response</label>
+      <textarea id="response" placeholder="Start the timer, then write your claim, evidence, and analysis…"></textarea>
+      <div class="row">
+        <span id="wordCount">0 words</span>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <span id="copyStatus" aria-live="polite"></span>
+          <button id="copyBtn" class="primary">Copy for Grading</button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+(function () {
+  const TOTAL = 240; // seconds
+  let remaining = TOTAL;
+  let intervalId = null;
+  let endTime = null;
+
+  const $ = (id) => document.getElementById(id);
+  const timerEl = $("timer");
+  const startBtn = $("startBtn");
+  const pauseBtn = $("pauseBtn");
+  const resetBtn = $("resetBtn");
+  const responseEl = $("response");
+  const promptEl = $("prompt");
+  const wordCountEl = $("wordCount");
+  const timesUpEl = $("timesUp");
+  const copyStatus = $("copyStatus");
+
+  function fmt(sec) {
+    sec = Math.max(0, Math.round(sec));
+    return Math.floor(sec / 60) + ":" + String(sec % 60).padStart(2, "0");
+  }
+
+  function render() {
+    timerEl.textContent = fmt(remaining);
+    timerEl.classList.toggle("danger", remaining <= 30);
+    timerEl.classList.toggle("warn", remaining > 30 && remaining <= 60);
+  }
+
+  function tick() {
+    remaining = Math.max(0, Math.ceil((endTime - Date.now()) / 1000));
+    render();
+    if (remaining === 0) finish();
+  }
+
+  function start() {
+    if (intervalId || remaining === 0) return;
+    endTime = Date.now() + remaining * 1000;
+    intervalId = setInterval(tick, 200);
+    startBtn.disabled = true;
+    pauseBtn.disabled = false;
+    responseEl.focus();
+  }
+
+  function pause() {
+    if (!intervalId) return;
+    clearInterval(intervalId);
+    intervalId = null;
+    remaining = Math.max(0, Math.ceil((endTime - Date.now()) / 1000));
+    render();
+    startBtn.disabled = false;
+    startBtn.textContent = "Resume";
+    pauseBtn.disabled = true;
+  }
+
+  function finish() {
+    clearInterval(intervalId);
+    intervalId = null;
+    startBtn.disabled = true;
+    pauseBtn.disabled = true;
+    responseEl.disabled = true;
+    timesUpEl.classList.add("show");
+  }
+
+  function reset() {
+    clearInterval(intervalId);
+    intervalId = null;
+    remaining = TOTAL;
+    render();
+    startBtn.disabled = false;
+    startBtn.textContent = "Start";
+    pauseBtn.disabled = true;
+    responseEl.disabled = false;
+    timesUpEl.classList.remove("show");
+  }
+
+  function unlock() {
+    responseEl.disabled = false;
+    timesUpEl.classList.remove("show");
+    responseEl.focus();
+  }
+
+  function countWords(text) {
+    const t = text.trim();
+    return t ? t.split(/\s+/).length : 0;
+  }
+
+  function updateWords() {
+    const n = countWords(responseEl.value);
+    wordCountEl.textContent = n + (n === 1 ? " word" : " words");
+  }
+
+  function buildMessage() {
+    const prompt = promptEl.value.trim() || "[no prompt entered]";
+    const response = responseEl.value.trim() || "[no response written]";
+    const words = countWords(responseEl.value);
+    const used = fmt(TOTAL - remaining);
+    return [
+      "Please grade my APUSH SAQ response using the rubric below. Be strict like an AP teacher.",
+      "",
+      "CONDITIONS: I wrote this in 4 minutes with no notes, as a timed in-class SAQ. Grade it as a student response under those conditions (don't penalize minor spelling/grammar, but do require accuracy and specificity).",
+      "",
+      "RUBRIC:",
+      "- Claim (/1): Does the response directly answer the prompt?",
+      "- Evidence (/3): Does it cite relevant, specific evidence from the assigned reading?",
+      "- Analysis (/3): Does it explain the significance of the evidence and connect it directly back to the prompt in detail?",
+      "",
+      "PROMPT: " + prompt,
+      "",
+      "MY RESPONSE (" + words + " words, " + used + " of 4:00 used):",
+      response,
+      "",
+      "Give a score for each category, a total out of 7, a one-sentence reason for each score, and one specific tip to improve."
+    ].join("\n");
+  }
+
+  function fallbackCopy(text) {
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.setAttribute("readonly", "");
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    let ok = false;
+    try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+    document.body.removeChild(ta);
+    return ok;
+  }
+
+  let statusTimer = null;
+  function showStatus(msg) {
+    copyStatus.textContent = msg;
+    clearTimeout(statusTimer);
+    statusTimer = setTimeout(() => { copyStatus.textContent = ""; }, 2500);
+  }
+
+  async function copy() {
+    const text = buildMessage();
+    let ok = false;
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        ok = true;
+      }
+    } catch (e) { ok = false; }
+    if (!ok) ok = fallbackCopy(text);
+    showStatus(ok ? "Copied!" : "Copy failed — try again");
+  }
+
+  // Theme toggle (remembered in this browser only)
+  const root = document.documentElement;
+  try {
+    const saved = localStorage.getItem("saq-theme");
+    if (saved === "light" || saved === "dark") root.setAttribute("data-theme", saved);
+  } catch (e) {}
+  $("themeBtn").addEventListener("click", () => {
+    const current = root.getAttribute("data-theme") ||
+      (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    const next = current === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem("saq-theme", next); } catch (e) {}
+  });
+
+  startBtn.addEventListener("click", start);
+  pauseBtn.addEventListener("click", pause);
+  resetBtn.addEventListener("click", reset);
+  $("unlockBtn").addEventListener("click", unlock);
+  $("copyBtn").addEventListener("click", copy);
+  responseEl.addEventListener("input", updateWords);
+
+  render();
+  updateWords();
+})();
+</script>
+</body>
+</html>
