@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="images/banner.svg" alt="APUSH SAQ Practice banner" width="100%">
+  <img src="banner.svg" alt="APUSH SAQ Practice banner" width="100%">
 </p>
 
 <p align="center">
@@ -28,7 +28,7 @@
 | 🛡️ | **Private** | No accounts, no servers, no tracking. Your writing never leaves your browser unless you paste it somewhere. |
 
 <p align="center">
-  <img src="images/desktop-light.png" alt="The app on a laptop: rubric sidebar on the left, prompt and response box on the right, timer at the top" width="900">
+  <img src="desktop-light.png" alt="The app on a laptop: rubric sidebar on the left, prompt and response box on the right, timer at the top" width="900">
 </p>
 
 ---
@@ -57,13 +57,13 @@ flowchart LR
 The timer changes color as time runs out so you can see how much is left without reading the numbers.
 
 <p align="center">
-  <img src="images/timer-states.png" alt="Timer at 4:00 and 1:30 (neutral), 0:50 (yellow) and 0:25 (red)" width="760">
+  <img src="timer-states.png" alt="Timer at 4:00 and 1:30 (neutral), 0:50 (yellow) and 0:25 (red)" width="760">
 </p>
 
 When it reaches zero, the response box locks:
 
 <p align="center">
-  <img src="images/times-up.png" alt="Time's up banner with an Unlock to keep writing button above a locked response box" width="700">
+  <img src="times-up.png" alt="Time's up banner with an Unlock to keep writing button above a locked response box" width="700">
 </p>
 
 ---
@@ -73,7 +73,7 @@ When it reaches zero, the response box locks:
 Clicking **Copy for Grading** puts this message on your clipboard, with your own prompt and response filled in:
 
 <p align="center">
-  <img src="images/copy.png" alt="Copy for Grading button with a Copied! confirmation" width="700">
+  <img src="copy.png" alt="Copy for Grading button with a Copied! confirmation" width="700">
 </p>
 
 ```text
@@ -115,8 +115,8 @@ score, and one specific tip to improve.
 
 <table>
   <tr>
-    <td width="68%"><img src="images/desktop-dark.png" alt="The app in dark mode on a laptop"></td>
-    <td width="32%"><img src="images/mobile.png" alt="The app on a phone, with the timer in yellow"></td>
+    <td width="68%"><img src="desktop-dark.png" alt="The app in dark mode on a laptop"></td>
+    <td width="32%"><img src="mobile.png" alt="The app on a phone, with the timer in yellow"></td>
   </tr>
   <tr>
     <td align="center"><sub>Dark mode</sub></td>
@@ -144,7 +144,7 @@ score, and one specific tip to improve.
 ```text
 ├── index.html     ← the whole app (HTML, CSS and JavaScript in one file)
 ├── README.md
-└── images/        ← screenshots and banner used in this README
+└── *.png, banner.svg  ← screenshots and banner used in this README
 ```
 
 ## 🔒 Privacy
